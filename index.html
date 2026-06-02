@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ontario Self-Employed Tax Calculator 2026 — Federal + Ontario + CPP</title>
+  <meta name="description" content="Estimate your total 2026 tax and CPP obligations as a self-employed Ontario resident. Includes federal tax, Ontario tax, Ontario Health Premium, surtax, CPP1, and CPP2.">
+  <link rel="canonical" href="https://ontarioselfemployedtaxcalc.ca/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍁</text></svg>">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Ontario Self-Employed Tax Calculator",
+    "url": "https://ontarioselfemployedtaxcalc.ca",
+    "description": "Estimate your total 2026 tax and CPP obligations as a self-employed Ontario resident. Includes federal tax, Ontario tax, Ontario Health Premium, surtax, CPP1, and CPP2.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+    "creator": { "@type": "Organization", "name": "OntarioSelfEmployedTaxCalc.ca", "url": "https://ontarioselfemployedtaxcalc.ca" }
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- ─── Header ─────────────────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo">
+      <span class="logo-maple">🍁</span>
+      <span class="logo-text">OntarioSelfEmployed<span>Tax</span>Calc.ca</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="faq.html">FAQ</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- ─── Hero ───────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🇨🇦 Ontario self-employed tax estimator</div>
+    <h1>How Much Tax Do You Actually Owe as Self-Employed in Ontario?</h1>
+    <p>Self-employed workers pay both sides of CPP and get nothing withheld at source. This calculator shows what you'll owe — before tax season catches you off guard.</p>
+  </div>
+</section>
+
+<!-- ─── Main ────────────────────────────────────────────────────────────── -->
+<main class="main-content">
+  <div class="content-col">
+
+    <!-- Calculator card -->
+    <div class="calc-card">
+      <div class="calc-header">
+        <span class="calc-icon">📊</span>
+        <h2>Self-Employed Tax Estimate — 2026</h2>
+      </div>
+
+      <div class="trust-strip">
+        <span class="ts-item"><span>✓</span> <strong>2026</strong> CRA rates</span>
+        <span class="ts-sep">·</span>
+        <span class="ts-item"><span>✓</span> Federal + Ontario</span>
+        <span class="ts-sep">·</span>
+        <span class="ts-item"><span>✓</span> CPP1 + CPP2</span>
+        <span class="ts-sep">·</span>
+        <span class="ts-item"><span>✓</span> Surtax + OHP</span>
+      </div>
+
+      <div class="calc-body">
+        <form id="calc-form" novalidate autocomplete="off">
+
+          <div class="form-grid">
+
+            <!-- Gross SE revenue -->
+            <div class="field">
+              <label for="gross-se">Annual gross self-employed revenue</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="gross-se" min="0" max="1000000" step="1" placeholder="0" inputmode="numeric" required>
+              </div>
+              <div class="hint">Your total self-employment revenue before expenses</div>
+            </div>
+
+            <!-- Business expenses -->
+            <div class="field">
+              <label for="expenses">Annual deductible business expenses</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="expenses" min="0" max="1000000" step="1" value="0" inputmode="numeric">
+              </div>
+              <div class="hint">Business expenses deducted from revenue to get net SE income</div>
+            </div>
+
+            <!-- Other employment income -->
+            <div class="field">
+              <label for="other-income">Other employment income (T4)</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="other-income" min="0" step="1" value="0" inputmode="numeric">
+              </div>
+              <div class="hint">If you also have a T4 job, enter that salary here</div>
+            </div>
+
+            <!-- RRSP contribution -->
+            <div class="field">
+              <label for="rrsp">RRSP contribution</label>
+              <div class="input-wrap">
+                <span class="input-prefix">$</span>
+                <input type="number" id="rrsp" min="0" step="1" value="0" inputmode="numeric">
+              </div>
+              <div class="hint">Reduces taxable income; this calculator does not estimate RRSP room</div>
+            </div>
+
+          </div><!-- /form-grid -->
+
+          <button type="submit" class="btn-calculate">Calculate Tax Estimate</button>
+
+        </form>
+      </div>
+    </div><!-- /calc-card -->
+
+    <!-- Ad unit -->
+    <div class="ad-unit ad-inactive" aria-hidden="true">
+      <ins class="adsbygoogle" data-ad-client="ca-pub-7744853829365165" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- Results -->
+    <div id="results" hidden aria-live="polite"></div>
+
+    <!-- Reminders (GST/HST, installments) -->
+    <div id="reminders" hidden></div>
+
+    <!-- Disclaimer (near results) -->
+    <div class="disclaimer-near-results">
+      This calculator provides estimates only. Results are based on 2026 federal and Ontario tax rates and should not be considered tax, accounting, or legal advice. The CPP deduction shown is an approximation — exact CPP treatment requires Schedule 8 at filing and may differ from this estimate. This tool does not file taxes on your behalf and does not account for every available deduction, credit, or individual circumstance. Consult a qualified tax professional for advice specific to your situation.
+    </div>
+
+    <!-- Ad unit -->
+    <div class="ad-unit ad-inactive" aria-hidden="true">
+      <ins class="adsbygoogle" data-ad-client="ca-pub-7744853829365165" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- Understanding Your Result -->
+    <div class="info-section">
+      <h2>Understanding Your Result</h2>
+
+      <h3>Why Self-Employed Tax Feels Higher</h3>
+      <p>As a self-employed person in Ontario, you're responsible for both the employee and employer portions of CPP — that's 11.9% instead of the 5.95% an employee pays. On top of that, nothing is withheld at source. When you're an employee, your employer remits tax, CPP, and EI every pay period. When you're self-employed, you receive the full amount and owe it all at filing time.</p>
+
+      <h3>CPP on Net Income, Not Gross</h3>
+      <p>CPP contributions are calculated on your net self-employment income — your revenue minus deductible business expenses. This is different from employees, whose CPP is calculated on gross employment income before any deductions. If you have significant business expenses, your CPP obligation can be substantially lower than 11.9% of your gross revenue.</p>
+
+      <h3>CPP1 vs. CPP2</h3>
+      <p>CPP1 applies to earnings up to the Year's Maximum Pensionable Earnings (YMPE) of $74,600. CPP2 applies to earnings between $74,600 and the Year's Additional Maximum Pensionable Earnings (YAMPE) of $85,000. Both are calculated at the self-employed rate (both sides).</p>
+      <ul>
+        <li><strong>CPP1:</strong> 11.9% on net SE income above $3,500, up to a maximum of $8,460.90</li>
+        <li><strong>CPP2:</strong> 8% on net SE income between $74,600 and $85,000, up to a maximum of $832.00</li>
+        <li>CPP2 only applies if your net self-employment income exceeds the YMPE</li>
+      </ul>
+
+      <h3>Ontario Surtax</h3>
+      <p>Ontario applies a surtax on higher provincial tax amounts. If your basic Ontario tax exceeds $5,818, a 20% surtax applies to the excess. If it exceeds $7,446, an additional 36% surtax applies to the amount over $7,446. The surtax is calculated on Ontario basic tax — not on your total income.</p>
+
+      <h3>Ontario Health Premium</h3>
+      <p>The Ontario Health Premium is an annual levy of up to $900 based on your taxable income. It's calculated separately from income tax and applies to Ontario residents with taxable income above $20,000. The premium increases progressively across income tiers.</p>
+
+      <h3>Effective Rate vs. Marginal Rate</h3>
+      <p>Your effective tax rate is the total obligations as a percentage of total income — the actual blended rate across all brackets. Your marginal rate is the highest rate applied to your last dollar of income. For self-employed workers with CPP obligations, the effective rate is almost always significantly higher than for an employee earning the same amount.</p>
+    </div>
+
+    <!-- Ad unit -->
+    <div class="ad-unit ad-inactive" aria-hidden="true">
+      <ins class="adsbygoogle" data-ad-client="ca-pub-7744853829365165" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- Example Calculations -->
+    <div class="info-section">
+      <h2>What Real People Actually Owe</h2>
+
+      <h3>$50,000 freelance revenue, $5,000 expenses</h3>
+      <p>You're a freelance designer. You billed $50K this year and wrote off $5K in software, hosting, and home-office costs. Your net self-employment income is $45,000.</p>
+      <p>Here's the number that surprises most people: CPP alone is <strong>$4,938.50</strong>. That's because you're paying both sides — the employee chunk <em>and</em> the employer chunk. An employee making $45,000 would only see $2,469.25 deducted. You're paying double, and it shows up all at once at tax time.</p>
+      <p>Add federal tax ($3,305.33), Ontario tax ($1,470.90), and the Ontario Health Premium ($450.00), and your total comes to <strong>$10,164.73</strong>. That's 22.6% of your income gone to taxes and contributions.</p>
+      <p>The good news: if you put aside about <strong>$847/month</strong>, April won't hurt. The bad news: most freelancers don't, and then they're scrambling.</p>
+
+      <h3>$100,000 contractor revenue, $15,000 expenses</h3>
+      <p>You're a consultant pulling in $100K with about $15K in deductible expenses — tools, travel, professional fees. Your net self-employment income lands at $85,000.</p>
+      <p>At this income, CPP hits both ceilings. CPP1 maxes out at <strong>$8,460.90</strong> and CPP2 adds another <strong>$832.00</strong>. That's $9,292.90 in CPP alone — more than some people's entire federal tax bill. Nobody warns you about this when you go solo.</p>
+      <p>Federal tax is $9,641.44, Ontario tax is $4,383.28, and the Ontario Health Premium is $750.00. Total obligations: <strong>$24,067.62</strong>. Your effective rate is 28.3%.</p>
+      <p>You keep about $5,078/month after everything. But you need to set aside <strong>$2,006/month</strong> to stay ahead of CRA. If you're not doing that every month, the bill at filing time is going to feel like a second mortgage payment.</p>
+
+      <h3>$20,000 side gig + $60,000 T4 salary</h3>
+      <p>You've got a day job paying $60K and you picked up $20K in freelance work on the side. This is where self-employment tax catches people off guard — your T4 job already has tax and CPP withheld every pay period, but that side income has nothing withheld. Zero.</p>
+      <p>CPP on your self-employment income is <strong>$1,963.50</strong>. Combined with your T4 income, your total federal tax is $9,943.29, Ontario tax is $4,349.13, and the Ontario Health Premium is $750.00. Total across everything: <strong>$17,005.92</strong>.</p>
+      <p>Most of that is already covered by your T4 withholdings, so you're not writing a cheque for the full amount. But the CPP on the side income? That's all you. If your T4 withholdings don't cover the extra tax from the freelance income, you'll owe the difference — plus that full CPP bill — when you file.</p>
+      <p>Set aside about <strong>$1,417/month</strong> from your side income (or about 71% of what the gig pays you after expenses) and you won't be caught short.</p>
+    </div>
+
+    <!-- About / methodology -->
+    <div class="info-section">
+      <h2>How This Calculator Works</h2>
+
+      <h3>What's Included</h3>
+      <ul>
+        <li>Federal income tax (2026 brackets with BPA phase-out)</li>
+        <li>Ontario provincial income tax (2026 brackets)</li>
+        <li>Ontario surtax (two-tier additive)</li>
+        <li>Ontario Health Premium (income-tier based)</li>
+        <li>CPP base contributions (self-employed rate on net SE income)</li>
+        <li>CPP2 contributions (self-employed rate on earnings between YMPE and YAMPE)</li>
+      </ul>
+
+      <h3>What's Not Included</h3>
+      <ul>
+        <li>EI premiums (not automatically required for self-employed — optional special benefits only)</li>
+        <li>GST/HST remittance calculation (informational reminder only)</li>
+        <li>CRA installment payment calculation (informational reminder only)</li>
+        <li>Capital cost allowance (CCA) or depreciation schedules</li>
+        <li>Additional non-refundable tax credits beyond basic personal amounts</li>
+        <li>Incorporation / corporate tax treatment</li>
+      </ul>
+
+      <div class="info-box">
+        <a href="https://calc-hq.ca/methodology/">Full methodology: Ontario Self-Employed Tax Calculator – Calc-HQ.ca</a>
+      </div>
+    </div>
+
+  </div><!-- /content-col -->
+</main>
+
+<!-- ─── Footer ──────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">🍁 OntarioSelfEmployedTaxCalc.ca</div>
+        <p>Ontario self-employed tax estimates for 2026. All calculations run in your browser. No data stored.</p>
+      </div>
+      <div class="footer-col">
+        <h4>PAGES</h4>
+        <a href="index.html">Home</a>
+        <a href="faq.html">FAQ</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>LEGAL</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="legal.html">Disclaimer</a>
+        <a href="terms.html">Terms of Use</a>
+      </div>
+      <div class="footer-col">
+        <h4>RELATED TOOLS</h4>
+        <div id="related-tools"></div>
+        <a href="https://calc-hq.ca/" class="more-tools-link" rel="noopener"><strong>More Tools</strong> → Calc-HQ.ca</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 OntarioSelfEmployedTaxCalc.ca — Part of the <a href="https://calc-hq.ca/" rel="noopener">Calc-HQ.ca</a> network</span>
+      <span>For informational purposes only. Not tax advice.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/calculator.js"></script>
+<script src="js/network.js"></script>
+
+<!-- Hamburger menu logic -->
+<script>
+(function() {
+  var hamburger = document.querySelector('.hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-overlay');
+
+  function toggleMenu() {
+    var isOpen = hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('active', isOpen);
+    overlay.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMenu);
+  }
+  if (overlay) {
+    overlay.addEventListener('click', closeMenu);
+  }
+  if (mobileNav) {
+    mobileNav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeMenu);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
