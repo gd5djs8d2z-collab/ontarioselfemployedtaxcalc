@@ -1,26 +1,117 @@
-// Related tools for the Ontario Self-Employed Tax Calculator footer
-// Injected by network.js — single source of truth for related tools
-(function() {
-  var selfDomain = 'ontarioselfemployedtaxcalc.ca';
+/* GA4 — Calc-HQ Network Analytics (single injection point) */
+(function(){if(!window.__GA4_LOADED){window.__GA4_LOADED=true;var id="G-W4SWZ1YRS2";var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}gtag("js",new Date());gtag("config",id);}})();
 
-  var tools = [
-    { name: 'Ontario Income Tax Calculator', url: 'https://ontarioincometaxcalc.ca/', desc: 'Full Ontario + federal income tax breakdown' },
-    { name: 'Ontario Commission Tax Calculator', url: 'https://ontariocommissiontaxcalc.ca/', desc: 'Commission withholding estimates' },
-    { name: 'Ontario Severance Pay Calculator', url: 'https://ontarioseverancepaycalc.ca/', desc: 'Severance pay and tax calculations' },
-    { name: 'Ontario Bonus Tax Calculator', url: 'https://ontariobonustaxcalc.ca/', desc: 'Tax on bonus and lump-sum payments' },
-    { name: 'Ontario Raise Calculator', url: 'https://ontarioraisecalc.ca/', desc: 'Tax impact of a salary increase' },
-    { name: 'CPP Calculator', url: 'https://cppcalc.ca/', desc: 'CPP1 + CPP2 contribution breakdown' },
-    { name: 'EI Calculator', url: 'https://eicalc.ca/', desc: 'EI premium calculation' }
-  ];
+/**
+ * OntarioSelfEmployedTaxCalc.ca — Ontario Payroll Cluster Network Tools
+ * Ontario cluster only. Self excluded at render time.
+ * Hub: https://calc-hq.ca
+ */
 
-  var container = document.getElementById('related-tools');
+const NETWORK_TOOLS = [
+  {
+    name: "Ontario Income Tax Calculator",
+    desc: "See every federal and Ontario tax bracket, your effective vs marginal rate, and surtax.",
+    url: "https://ontarioincometaxcalc.ca/",
+    live: true
+  },
+  {
+    name: "Ontario Take-Home Pay Calculator",
+    desc: "Estimate your Ontario net pay after federal tax, provincial tax, CPP, EI, and OHP.",
+    url: "https://ontariotakehomecalc.ca/",
+    live: true
+  },
+  {
+    name: "Ontario Bonus Tax Calculator",
+    desc: "Calculate withholding on a bonus payment using the CRA T4032 annualization method.",
+    url: "https://ontariobonustaxcalc.ca/",
+    live: true
+  },
+  {
+    name: "Ontario Raise Calculator",
+    desc: "Calculate your after-tax take-home change from a raise or salary increase.",
+    url: "https://ontarioraisecalc.ca/",
+    live: true
+  },
+  {
+    name: "Ontario Marginal Tax Calculator",
+    desc: "Find your combined federal and Ontario marginal tax rate on any income level.",
+    url: "https://marginaltaxcalc.ca/",
+    live: true
+  },
+  {
+    name: "Ontario Commission Tax Calculator",
+    desc: "Estimate Ontario commission tax withholding using the CRA T4032 bonus method.",
+    url: "https://ontariocommissiontaxcalc.ca/",
+    live: true
+  },
+  {
+    name: "Ontario Severance Pay Calculator",
+    desc: "Calculate Ontario severance pay and withholding using the CRA T4032 method.",
+    url: "https://ontarioseverancepaycalc.ca/",
+    live: true
+  },
+  {
+    name: "Ontario Termination Pay Calculator",
+    desc: "Estimate Ontario termination pay and tax withholding amounts.",
+    url: "https://ontarioterminationpaycalc.ca/",
+    live: true
+  }
+];
+
+const CURRENT_SITE = "https://ontarioselfemployedtaxcalc.ca/";
+
+function renderFooter() {
+  var footerEl = document.getElementById("network-footer");
+  if (!footerEl) return;
+
+  footerEl.innerHTML =
+    '<div class="container">' +
+      '<div class="footer-grid footer-grid-4">' +
+        '<div class="footer-brand">' +
+          '<div class="logo">\uD83C\uDF41 OntarioSelfEmployedTaxCalc.ca</div>' +
+          '<p>Ontario self-employment tax calculations for 2026. All calculations run in your browser. No data stored.</p>' +
+        '</div>' +
+        '<div class="footer-col">' +
+          '<h4>PAGES</h4>' +
+          '<a href="index.html">Home</a>' +
+          '<a href="faq.html">FAQ</a>' +
+          '<a href="about.html">About</a>' +
+          '<a href="contact.html">Contact</a>' +
+        '</div>' +
+        '<div class="footer-col">' +
+          '<h4>LEGAL</h4>' +
+          '<a href="privacy.html">Privacy Policy</a>' +
+          '<a href="disclaimer.html">Disclaimer</a>' +
+          '<a href="terms.html">Terms of Use</a>' +
+        '</div>' +
+        '<div class="footer-col">' +
+          '<h4>RELATED TOOLS</h4>' +
+          '<div id="related-tools"></div>' +
+          '<a href="https://calc-hq.ca/" class="more-tools-link" rel="noopener"><strong>More Tools</strong> \u2192 Calc-HQ.ca</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="footer-bottom">' +
+        '<span>\u00A9 2026 OntarioSelfEmployedTaxCalc.ca \u2014 Part of the <a href="https://calc-hq.ca/" rel="noopener">Calc-HQ.ca</a> network</span>' +
+        '<span>For informational purposes only. Not tax advice.</span>' +
+      '</div>' +
+    '</div>';
+
+  renderFooterRelatedTools();
+}
+
+function renderFooterRelatedTools() {
+  var container = document.getElementById("related-tools");
   if (!container) return;
 
-  var html = '';
-  for (var i = 0; i < tools.length; i++) {
-    // Self-exclude: never link to own domain
-    if (tools[i].url.indexOf(selfDomain) !== -1) continue;
-    html += '<a href="' + tools[i].url + '" rel="noopener">' + tools[i].name + '</a>';
-  }
+  var html = "";
+  NETWORK_TOOLS.forEach(function (tool) {
+    if (!tool.live) return;
+    if (tool.url === CURRENT_SITE) return;
+
+    html += '<a href="' + tool.url + '" rel="noopener">' + tool.name + '</a>';
+  });
+
   container.innerHTML = html;
-})();
+}
+
+document.addEventListener("DOMContentLoaded", renderFooter);
