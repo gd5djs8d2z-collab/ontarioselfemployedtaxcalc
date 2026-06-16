@@ -81,7 +81,7 @@ function renderFooter() {
         '<div class="footer-col">' +
           '<h4>LEGAL</h4>' +
           '<a href="privacy.html">Privacy Policy</a>' +
-          '<a href="disclaimer.html">Disclaimer</a>' +
+          '<a href="legal.html">Disclaimer</a>' +
           '<a href="terms.html">Terms of Use</a>' +
         '</div>' +
         '<div class="footer-col">' +
@@ -115,3 +115,4 @@ function renderFooterRelatedTools() {
 }
 
 document.addEventListener("DOMContentLoaded", renderFooter);
+document.addEventListener("DOMContentLoaded", renderFooterRelatedTools);
